@@ -78,6 +78,10 @@ app.post("/api/notes", (req, res) => {
    
 });
 
+//handle delete
+app.delete("/api/notes:id", (req, res) => {
+    let note_id = req.params.id;
+})
 //start listening on either the host port or default port that was set
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
