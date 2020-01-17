@@ -82,8 +82,10 @@ const handleNoteDelete = (event) => {
 };
 
 // Sets the activeNote and displays it
-const handleNoteView = () => {
+const handleNoteView = function() {
+  console.log($(this).data());
   activeNote = $(this).data();
+  console.log(activeNote);
   renderActiveNote();
 };
 
@@ -106,12 +108,12 @@ const handleRenderSaveBtn = () => {
 // Render's the list of note titles
 const renderNoteList = (notes) => {
   $noteList.empty();
-
+  
   const noteListItems = [];
 
   for (let i = 0; i < notes.length; i++) {
     let note = notes[i];
-
+    console.log(note);
     const $li = $("<li class='list-group-item'>").data(note);
     const $span = $("<span>").text(note.title);
     const $delBtn = $(
