@@ -45,28 +45,15 @@ app.get("/api/notes", (req, res) => {
         //throw error if present
         if (err) throw err;
         //parse data
-        let parsed_data = JSON.parse(data);
         
         
-        res.json(parsed_data);
+        
+        res.json(JSON.parse(data));
 
     });
 });
 
-// app.get("/notes/:id", (req, res) => {
-    
 
-//     fs.readFile("./db/db.json", (err, data) => {
-//         if (err) throw err;
-//         let note_array = JSON.parse(data);
-        
-//         for(note in note_array){
-            
-//         }
-
-//     })
-    
-// })
 
 //handle POST requests to actually save data into the db.JSON file
 app.post("/api/notes", (req, res) => {
@@ -84,7 +71,7 @@ app.post("/api/notes", (req, res) => {
         
         //not working correctly, figure out a way to add ids to the notes so that when you click on them they show up
         
-         if(note_array.length === null){
+         if(note_array.length === 0){
              let id = 0;
              newNote.id = id + 1;
          }
@@ -108,8 +95,26 @@ app.post("/api/notes", (req, res) => {
 });
 
 //handle delete
-app.delete("/api/notes:id", (req, res) => {
-    let note_id = req.params.id;
+app.delete("/api/notes/:id", (req, res) => {
+    let note_id = parseInt(req.params.id);
+
+    fs.readFile("./db/db.json", (err, data) => {
+        if (err) throw err;
+
+        let notes_array = JSON.parse(data);
+
+        for(let i = 0; i < notes_array.length; i++){
+            if(note_id === notes_array[i].id){
+                res.json(notes_array.splice(i, 1));
+                
+            }
+        }
+
+        fs.writeFile("./db/db.json", JSON.stringify(notes_array), (err) => {
+            if (err) throw err;
+        });
+        
+    });
 
     
 });
