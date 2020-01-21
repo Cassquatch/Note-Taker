@@ -50,7 +50,7 @@ app.post("/api/notes", (req, res) => {
     let note_array = [];
     let newNote = req.body;
     //read what is currently in db.json and store it in an array
-    fs.readFile("./db/db.json", (err, data) => {
+    fs.readFile("db/db.json", (err, data) => {
         if (err) throw err;
         //stringify data to put it in the array
         note_array = JSON.parse(data);
@@ -66,7 +66,7 @@ app.post("/api/notes", (req, res) => {
         }
 
         note_array.push(newNote);
-        fs.writeFile("./db/db.json", JSON.stringify(note_array), (err) => {
+        fs.writeFile("db/db.json", JSON.stringify(note_array), (err) => {
             if (err) throw err;
         });
     });
@@ -77,7 +77,7 @@ app.post("/api/notes", (req, res) => {
 app.delete("/api/notes/:id", (req, res) => {
     let note_id = parseInt(req.params.id);
 
-    fs.readFile("./db/db.json", (err, data) => {
+    fs.readFile("db/db.json", (err, data) => {
         if (err) throw err;
 
         let notes_array = JSON.parse(data);
@@ -88,7 +88,7 @@ app.delete("/api/notes/:id", (req, res) => {
             }
         }
 
-        fs.writeFile("./db/db.json", JSON.stringify(notes_array), (err) => {
+        fs.writeFile("db/db.json", JSON.stringify(notes_array), (err) => {
             if (err) throw err;
         });
     });
