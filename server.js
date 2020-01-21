@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 //handle GET routes for the api
 app.get("/api/notes", (req, res) => {
     //read the db.json file to get the saved notes and display them back
-    fs.readFile("db/db.JSON", (err, data) => {
+    fs.readFile("db/db.json", (err, data) => {
         //throw error if present
         if (err) throw err;
         //parse data
