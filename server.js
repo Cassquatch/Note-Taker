@@ -56,11 +56,12 @@ app.post("/api/notes", (req, res) => {
         note_array = JSON.parse(data);
 
         //not working correctly, figure out a way to add ids to the notes so that when you click on them they show up
-        if (note_array.length === 0) {
-            let id = 0;
-            newNote.id = id + 1;
-        }
-        if (note_array.length > 0) {
+        
+         if(note_array.length === 0){
+             
+             newNote.id = 1;
+         }
+         if(note_array.length > 0){
             let curr_length = note_array.length;
             newNote.id = note_array[curr_length - 1].id + 1;
         }
